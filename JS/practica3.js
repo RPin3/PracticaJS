@@ -1,5 +1,4 @@
 //practicaIII
-
 document.getElementById('calcularCotizacion').addEventListener('click', function() {
     const precio = parseFloat(document.getElementById('precio').value);
     const porcentajePagoInicial = parseFloat(document.getElementById('porcentajePagoInicial').value);
@@ -14,7 +13,16 @@ document.getElementById('calcularCotizacion').addEventListener('click', function
     const totalFinanciar = (precio - pagoInicial).toFixed(2);
     const pagoMensual = (totalFinanciar / plazo).toFixed(2);
 
-    document.getElementById('pagoInicial').textContent = pagoInicial;
-    document.getElementById('totalFinanciar').textContent = totalFinanciar;
-    document.getElementById('pagoMensual').textContent = pagoMensual;
+    // Formatear los números con comas para separar los miles
+    const formattedPagoInicial = formatNumberWithCommas(pagoInicial);
+    const formattedTotalFinanciar = formatNumberWithCommas(totalFinanciar);
+    const formattedPagoMensual = formatNumberWithCommas(pagoMensual);
+
+    document.getElementById('pagoInicial').textContent = formattedPagoInicial;
+    document.getElementById('totalFinanciar').textContent = formattedTotalFinanciar;
+    document.getElementById('pagoMensual').textContent = formattedPagoMensual;
 });
+
+function formatNumberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
